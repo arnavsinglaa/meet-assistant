@@ -66,9 +66,7 @@ if (uploaded_file or recorded_audio) and st.button("Process Meeting Audio"):
     st.write(transcript)
 
     with st.spinner("Generating summary with Gemini..."):
-
-       model = genai.GenerativeModel("gemini-1.5-flash")
-
+        model = genai.GenerativeModel("gemini-1.5-flash")
         prompt = f"""
 You are an executive meeting assistant.
 
@@ -129,7 +127,8 @@ Transcript:
 
     st.subheader("📌 Meeting Summary")
     st.markdown(gemini_response.text)
-        # Send output to n8n
+
+    # Send output to n8n
     webhook_url = "https://arnavspace.app.n8n.cloud/webhook-test/7d57bfbc-0b0b-4f35-9f23-637ad7f7e794"
 
     payload = {
@@ -138,11 +137,11 @@ Transcript:
     }
 
     st.download_button(
-    "📋 Download Meeting Notes",
-    gemini_response.text,
-    file_name="meeting_notes.txt",
-    mime="text/plain"
-)
+        "📋 Download Meeting Notes",
+        gemini_response.text,
+        file_name="meeting_notes.txt",
+        mime="text/plain"
+    )
 
     response = requests.post(webhook_url, json=payload)
 
