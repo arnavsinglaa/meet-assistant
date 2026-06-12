@@ -67,7 +67,7 @@ if (uploaded_file or recorded_audio) and st.button("Process Meeting Audio"):
 
     with st.spinner("Generating summary with Gemini..."):
 
-        model = genai.GenerativeModel("gemini-2.5-flash")
+       model = genai.GenerativeModel("gemini-1.5-flash")
 
         prompt = f"""
 You are an executive meeting assistant.
