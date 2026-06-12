@@ -66,58 +66,12 @@ if (uploaded_file or recorded_audio) and st.button("Process Meeting Audio"):
     st.write(transcript)
 
     with st.spinner("Generating summary with Gemini..."):
-        model = genai.GenerativeModel("gemini-1.5-flash")
+        model = genai.GenerativeModel("gemini-2.5-flash")
         prompt = f"""
-You are an executive meeting assistant.
-
-Convert the following meeting transcript into structured outputs.
-
-Return EXACTLY in this format:
-
-## Executive Summary
-(2-3 sentences)
-
-## Discussion Points
-- Bullet points
-
-## Decisions Made
-- Bullet points
-
-## Action Items
-- Owner: Task - Deadline
-
-## Deadlines
-- Mention any dates/times mentioned.
-
-## Draft Follow-up Email
-
-Subject: ...
-
-Hi Team,
-
-...
-
-Regards,
-Arnav
-
-## Automation JSON
-
-Return ONLY valid JSON in this section.
-
-Example format:
-{{
-  "email": {{
-    "subject": "",
-    "body": ""
-  }},
-  "action_items": [
-    {{
-      "owner": "",
-      "task": "",
-      "deadline": ""
-    }}
-  ]
-}}
+Summarize this meeting transcript into:
+1. Executive Summary
+2. Action Items
+3. Draft Follow-up Email
 
 Transcript:
 {transcript}
